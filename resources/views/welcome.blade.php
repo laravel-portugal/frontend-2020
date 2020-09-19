@@ -118,5 +118,10 @@
         </div>
     </div>
 
-    <!-- Links listing -->
+    <!-- START: Links listing -->
+
+        <livewire:recent-links />
+
+
+        <!-- END: Links listing -->
 @endsection
