@@ -8,7 +8,6 @@ class NavbarMenu extends Component
 {
     public $links = [
         'Welcome' => '/',
-        'Login' => '/login',
         'Submit link' => '/submit-link',
     ];
 

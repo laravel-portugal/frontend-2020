@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/user/{username}/links', function () {
+    return "<h1> trabalha malandro </h1>";
+})->name('user.links');
+Route::get('/tag/{tag}/links', function () {
+    return "<h1> trabalha malandro </h1>";
+})->name('tag.links');
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

@@ -16,3 +16,12 @@ Todos:
 - Backend -> api
 - Testes Dusk
 
+Filtrar por categoria/tag
+Filtar por User (handle)
+Pesquisa
+Link precisa de campo `title`.
+Imagem do Link
+ - Meta info do link
+ - Fallback para imagem de snapshot
+Implementar extensão de browser para partilhar
+

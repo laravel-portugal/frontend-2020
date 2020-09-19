@@ -5,7 +5,7 @@
     <div class="flex-1 bg-white p-6 flex flex-col justify-between">
         <div class="flex-1">
             <p class="text-sm leading-5 font-medium text-indigo-600">
-                <a href="#" class="hover:underline">
+                <a href="{{ route('tag.links', [ 'tag' => 'blog']) }}" class="hover:underline">
                     Blog
                 </a>
             </p>
@@ -28,7 +28,7 @@
             </div>
             <div class="ml-3">
                 <p class="text-sm leading-5 font-medium text-gray-900">
-                    <a href="#" class="hover:underline">
+                    <a href="{{ route('user.links', [ 'username' => 'my_username']) }}" class="hover:underline">
                         {{ $link['author_name']}}
                     </a>
                 </p>
