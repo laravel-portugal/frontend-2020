@@ -16,6 +16,7 @@
         "laravel/jetstream": "^1.2",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
+        "laravolt/avatar": "^4.0",
         "livewire/livewire": "^2.0"
     },
     "require-dev": {

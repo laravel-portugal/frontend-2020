@@ -12,7 +12,7 @@ class FakeClient implements ClientInterface
                 'title'        => 'Boost your conversion rate',
                 'description'  => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.',
                 'author_name'  => 'Roel Aufderhar',
-                'author_email' => 'roel.aufderhar@gmail.com',
+                'author_email' => 'me@pedrovasconcelos.com',
                 'cover_image'  => 'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
                 'created_at'   => '2020-09-19 16:49:31.229524',
             ],
