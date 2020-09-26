@@ -17,14 +17,11 @@ class Link extends Component
 
     public function mount(): void
     {
-        $hash = md5(strtolower(trim($this->link['author_email'])));
+        $hash           = md5(strtolower(trim($this->link['author_email'])));
         $this->gravatar = "http://www.gravatar.com/avatar/{$hash}?d=404";
-        $response = Http::get($this->gravatar);
-        if ( !$response->ok() ) {
+        $response       = Http::get($this->gravatar);
+        if ( ! $response->ok()) {
             $this->gravatar = null;
         }
-
-
-
     }
 }
