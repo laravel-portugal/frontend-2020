@@ -17,9 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/submit-link', function () {
+    return view('submit-link');
+});
+
 Route::get('/user/{username}/links', function () {
     return "<h1> trabalha malandro </h1>";
 })->name('user.links');
+
 Route::get('/tag/{tag}/links', function () {
     return "<h1> trabalha malandro </h1>";
 })->name('tag.links');
