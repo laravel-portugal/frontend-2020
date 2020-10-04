@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\ClientInterface;
 use Livewire\Component;
 
 class SubmitLink extends Component
@@ -13,6 +14,8 @@ class SubmitLink extends Component
     public $description;
     public $tags;
 
+    public $avaliableTags;
+
     protected array $rules = [
         'title' => 'required',
         'name' => 'required',
@@ -21,6 +24,14 @@ class SubmitLink extends Component
         'description' => 'required',
         'tags' => 'required',
     ];
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->client = resolve(ClientInterface::class);
+        $this->avaliableTags = $this->client->getTags()->all();
+    }
+
 
     public function submit(): void
     {
