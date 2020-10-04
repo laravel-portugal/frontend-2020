@@ -2,7 +2,7 @@
     <form class="w-11/12 md:w-2/3 mx-auto" wire:submit.prevent="submit">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <x-form-field label="Website">
+                <x-form-field label="Website" id="website">
                     <input id="website" class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="www.example.com" wire:model="website">
                 </x-form-field>
 
@@ -28,19 +28,19 @@
                     </div>
                 </x-form-field>
 
-                <x-form-field label="Titulo">
+                <x-form-field label="Titulo" id="title">
                     <input id="title" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" wire:model="title">
                 </x-form-field>
 
-                <x-form-field label="Nome">
+                <x-form-field label="Nome" id="name">
                     <input id="name" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" wire:model="name">
                 </x-form-field>
 
-                <x-form-field label="e-mail">
+                <x-form-field label="e-mail" id="email">
                     <input id="email" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" wire:model="email">
                 </x-form-field>
 
-                <x-form-field label="Descrição">
+                <x-form-field label="Descrição" id="description">
                     <textarea id="description" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" wire:model="description"></textarea>
                 </x-form-field>
                 <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
