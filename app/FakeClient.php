@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class FakeClient implements ClientInterface
 {
@@ -63,5 +64,13 @@ class FakeClient implements ClientInterface
                 'created_at'   => '2020-09-19 16:49:31.229524',
             ],
         ]);
+    }
+
+    public function submitLink($attributes)
+    {
+        return [
+            'status' => 1,
+            'message' => 'Link submetido com sucesso.',
+        ];
     }
 }

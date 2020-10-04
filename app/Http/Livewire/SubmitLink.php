@@ -13,13 +13,13 @@ class SubmitLink extends Component
     public $website;
     public $description;
     public $tags;
-
     public $avaliableTags;
+    public $response;
 
     protected array $rules = [
         'title' => 'required',
         'name' => 'required',
-        'email' => 'required',
+        'email' => 'email|required',
         'website' => 'required',
         'description' => 'required',
         'tags' => 'required',
@@ -35,18 +35,39 @@ class SubmitLink extends Component
 
     public function submit(): void
     {
+        $this->dumpData();
         $this->validate();
 
-        $this->tags = collect($this->tags)->filter(function($item){
+        $this->tags = collect($this->tags)->filter(function ($item) {
             return $item === true;
         })->all();
 
-        // Execution doesn't reach here if validation fails.
-        dump($this->tags);
+
+        $this->response = null;
+        $this->response = $this->client->submitLink([
+            'title' => $this->title,
+            'name' => $this->name,
+            'email' => $this->email,
+            'website' => $this->website,
+            'description' => $this->description,
+            'tags' => $this->tags,
+        ]);
     }
 
     public function render()
     {
         return view('livewire.submit-link');
+    }
+
+    private function dumpData(): void
+    {
+        dd(
+            $this->title,
+            $this->name,
+            $this->email,
+            $this->website,
+            $this->description,
+            $this->tags,
+        );
     }
 }
