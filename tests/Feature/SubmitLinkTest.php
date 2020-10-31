@@ -28,22 +28,12 @@ class SubmitLinkTest extends TestCase
     }
 
     /** @test */
-    public function it_validates_website_input_is_an_active_url()
+    public function it_validates_website_input_is_an_active_and_unique()
     {
         Livewire::test(SubmitLink::class)
             ->set([
                 'website' => 'http://www.gugal.come'
             ])
-            ->assertHasErrors(['website' => ['active_url']]);
-    }
-
-    /** @test */
-    public function it_validates_website_input_is_unique()
-    {
-        Livewire::test(SubmitLink::class)
-            ->set([
-                'website' => 'http://www.google.com'
-            ])
-            ->assertHasErrors(['website' => [UniqueLink::class]]);
+            ->assertHasErrors(['website' => ['active_url', UniqueLink::class]]);
     }
 }
