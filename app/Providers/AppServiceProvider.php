@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\ClientInterface;
-use App\FakeClient;
+use App\Http\Clients\RealClient;
+use App\Http\Clients\ApiClient;
+use App\Http\Clients\FakeClient;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,11 +16,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ClientInterface::class, function($app) {
-            if ($this->app->environment('local')) {
+        $this->app->bind(ApiClient::class, function ($app) {
+            if (ApiClient::isFake()) {
                 return new FakeClient();
             }
-            throw new \DomainException('Implement real Api Client');
+
+            return new RealClient();
         });
     }
 
