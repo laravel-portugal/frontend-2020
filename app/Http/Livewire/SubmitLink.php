@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use App\ClientInterface;
+use App\Http\Clients\ApiClient;
+use App\Rules\UniqueLink;
 use Livewire\Component;
 
 class SubmitLink extends Component
 {
+    protected $client;
+
     public $title;
     public $name;
     public $email;
@@ -16,42 +19,34 @@ class SubmitLink extends Component
     public $avaliableTags;
     public $response;
 
-    protected array $rules = [
-        'title' => 'required',
-        'name' => 'required',
-        'email' => 'email|required',
-        'website' => 'required',
-        'description' => 'required',
-        'tags' => 'required',
-    ];
-
-    public function __construct()
+    public function mount()
     {
-        parent::__construct();
-        $this->client = resolve(ClientInterface::class);
-        $this->avaliableTags = $this->client->getTags()->all();
+        $client = resolve(ApiClient::class);
+        $this->avaliableTags = $client->getTags();
     }
 
+    public function updatedWebsite()
+    {
+        $this->validate(['website' => $this->getRules()['website']]);
+    }
 
     public function submit(): void
     {
-        $this->dumpData();
-        $this->validate();
+        $this->validate($this->getRules());
 
-        $this->tags = collect($this->tags)->filter(function ($item) {
-            return $item === true;
-        })->all();
+        $this->tags = collect($this->tags)->filter()->all();
 
+        /** @var \App\Http\Clients\ApiClient $client */
+        $client = resolve(ApiClient::class);
 
-        $this->response = null;
-        $this->response = $this->client->submitLink([
+        $this->response = $client->submitLink([
             'title' => $this->title,
-            'name' => $this->name,
-            'email' => $this->email,
-            'website' => $this->website,
+            'author_name' => $this->name,
+            'author_email' => $this->email,
+            'link' => $this->website,
             'description' => $this->description,
             'tags' => $this->tags,
-        ]);
+        ])->json();
     }
 
     public function render()
@@ -59,15 +54,15 @@ class SubmitLink extends Component
         return view('livewire.submit-link');
     }
 
-    private function dumpData(): void
+    protected function getRules()
     {
-        dd(
-            $this->title,
-            $this->name,
-            $this->email,
-            $this->website,
-            $this->description,
-            $this->tags,
-        );
+        return [
+            'title' => 'required',
+            'name' => 'required',
+            'email' => 'email|required',
+            'website' => ['required', 'active_url', new UniqueLink()],
+            'description' => 'required',
+            'tags' => 'required',
+        ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\ClientInterface;
+use App\Http\Clients\ApiClient;
 use Livewire\Component;
 
 class RecentLinks extends Component
@@ -10,12 +10,12 @@ class RecentLinks extends Component
     public string $title = 'Links recentes.';
     public string $description = 'Todos juntos criamos diariamente um base de conhecimento.';
     public array $links;
-    private ClientInterface $client;
+    private ApiClient $client;
 
     public function __construct()
     {
         parent::__construct();
-        $this->client = resolve(ClientInterface::class);
+        $this->client = resolve(ApiClient::class);
         $this->links = $this->client->getRecentLinks()->all();
     }
 

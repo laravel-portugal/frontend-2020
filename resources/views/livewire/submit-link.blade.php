@@ -3,7 +3,8 @@
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <x-form-field label="Website" id="website">
-                    <input id="website" class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="www.example.com" wire:model="website">
+                    <input id="website" class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                           placeholder="www.example.com" wire:model.lazy="website">
                 </x-form-field>
 
                 <x-form-field label="Image Preview">
@@ -50,10 +51,10 @@
                         @foreach( $avaliableTags as $tag )
                             <div class="relative flex items-start">
                                 <div class="flex items-center h-5">
-                                    <input id="livewire" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" wire:model="tags.{{$tag['id']}}">
+                                    <input id="tags[{{ $loop->index }}" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" wire:model="tags.{{$tag['id']}}">
                                 </div>
                                 <div class="ml-3 text-sm leading-5">
-                                    <label for="livewire" class="font-medium text-gray-700">{{$tag['name']}}</label>
+                                    <label for="tags[{{ $loop->index }}" class="font-medium text-gray-700">{{$tag['name']}}</label>
                                 </div>
                             </div>
                         @endforeach
