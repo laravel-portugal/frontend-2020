@@ -5,9 +5,12 @@ namespace App\Http\Livewire;
 use App\Http\Clients\ApiClient;
 use App\Rules\UniqueLink;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class SubmitLink extends Component
 {
+    use WithFileUploads;
+
     protected $client;
 
     public $title;
@@ -18,16 +21,25 @@ class SubmitLink extends Component
     public $tags;
     public $avaliableTags;
     public $response;
+    public $photo;
+    public $generatedPhoto;
 
-    public function mount()
+    public function mount(): void
     {
         $client = resolve(ApiClient::class);
         $this->avaliableTags = $client->getTags();
     }
 
-    public function updatedWebsite()
+    public function updatedWebsite(): void
     {
         $this->validate(['website' => $this->getRules()['website']]);
+        // TODO: generate the cover_photo from the url. For now just do:
+        $this->generatedPhoto = 'https://picsum.photos/200/300';
+    }
+
+    public function clearPhoto(): void
+    {
+        $this->photo = null;
     }
 
     public function submit(): void

@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Http\Clients\RealClient;
 use App\Http\Clients\ApiClient;
 use App\Http\Clients\FakeClient;
+use App\Http\Clients\RealClient;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

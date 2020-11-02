@@ -15,6 +15,7 @@ class SubmitLinkTest extends TestCase
         parent::setUp();
 
         ApiClient::fake();
+        UniqueLink::fake();
     }
 
     /** @test */
