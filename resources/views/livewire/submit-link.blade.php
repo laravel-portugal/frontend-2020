@@ -16,8 +16,8 @@
                         <div class="mt-1 flex-col rounded-md shadow-sm">
                             <div
                                 class="relative mt-2 flex justify-center bg-red-100 items-center w-full h-64 px-6 pt-5 pb-6 rounded-md shadow-inner border border-gray-200 bg-cover bg-no-repeat bg-center"
-                                x-bind:style="'background-image: url(\'' + '{{ $generatedPhoto }}' + '\');'">
-                                @if ($generatedPhoto && !$photo)
+                                x-bind:style="'background-image: url(\'{{ optional($photo)->temporaryUrl() ?? $generatedPhoto }}\');'">
+                                @if (!$photo)
                                     <div class="text-center bg-white bg-opacity-75 rounded shadow p-10"
                                          x-on:drop.prevent="adding = false; @this.upload('photo', event.dataTransfer.files[0])"
                                          x-on:dragover.prevent="adding = true"
@@ -42,9 +42,7 @@
                                             PNG, JPG, GIF up to 10MB
                                         </p>
                                     </div>
-                                @endif
-
-                                @if ($photo)
+                                @else ($photo)
                                     <div class="absolute inset-0 block bg-cover bg-no-repeat"
                                          x-bind:style="'background-image: url(\'{{ $photo->temporaryUrl() }}\');'">
                                         <div
