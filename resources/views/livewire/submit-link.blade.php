@@ -11,55 +11,63 @@
 
                 @if ($website && !$errors->get('website'))
                     <x-form-field label="Image Preview">
-                        <input type="file" class="hidden" accept="image/*" x-ref="photo" wire:model="photo">
-
-                        <div class="mt-1 flex-col rounded-md shadow-sm">
+                        <div class="mt-1 flex-col rounded-md">
                             <div
-                                class="relative mt-2 flex justify-center bg-red-100 items-center w-full h-64 px-6 pt-5 pb-6 rounded-md shadow-inner border border-gray-200 bg-cover bg-no-repeat bg-center"
-                                x-bind:style="'background-image: url(\'{{ optional($photo)->temporaryUrl() ?? $generatedPhoto }}\');'">
-                                @if (!$photo)
-                                    <div class="text-center bg-white bg-opacity-75 rounded shadow p-10"
-                                         x-on:drop.prevent="adding = false; @this.upload('photo', event.dataTransfer.files[0])"
-                                         x-on:dragover.prevent="adding = true"
-                                         x-on:dragleave.prevent="adding = false"
-                                         x-bind:class="{ 'bg-opacity-100': adding }"
-                                         wire:loading.class="invisible" wire:target="photo">
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
-                                             viewBox="0 0 48 48">
-                                            <path
-                                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                        <p class="mt-1 text-sm text-gray-600">
-                                            <button type="button"
-                                                    class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
-                                                    x-on:click.prevent="$refs.photo.click()">
-                                                Upload a file
-                                            </button>
-                                            or drag and drop
-                                        </p>
-                                        <p class="mt-1 text-xs text-gray-500">
-                                            PNG, JPG, GIF up to 10MB
-                                        </p>
-                                    </div>
-                                @else ($photo)
-                                    <div class="absolute inset-0 block bg-cover bg-no-repeat"
-                                         x-bind:style="'background-image: url(\'{{ $photo->temporaryUrl() }}\');'">
-                                        <div
-                                            class="flex items-center justify-center absolute top-0 right-0 rounded-full bg-white shadow-md leading-none w-8 h-8 mr-2 mt-2 cursor-pointer"
-                                            wire:click="clearPhoto()">
-                                            <span>X</span>
-                                        </div>
-                                    </div>
-                            @endif
+                                class="relative mt-2 flex justify-center items-center w-full h-64 rounded-md shadow-inner border border-gray-200">
+                                <input type="file" class="hidden" accept="image/*" x-ref="photo" wire:model="photo">
 
-                            <!-- the loading indicator -->
-                                <div wire:loading wire:target="photo">
+                                <div wire:init="generateCoverImage" wire:loading wire:target="generateCoverImage">
                                     <div
-                                        class="flex items-center justify-center absolute inset-0 block bg-white bg-opacity-75">
-                                        <span>Add a spinner here</span>
+                                        class="flex items-center justify-center absolute inset-0 bg-white bg-opacity-75 m-8 p-8">
+                                        <span class="text-center">Generating the cover image...</span>
                                     </div>
                                 </div>
+
+                                @if ($photo)
+                                    <div wire:key="photo"
+                                         class="absolute inset-0 block bg-cover bg-no-repeat bg-center group">
+                                        {{--                                         style="background-image: url('{{ $photo->temporaryUrl() }}')">--}}
+                                        <img class="rounded-md h-full w-full object-cover"
+                                             src="{{ $photo->temporaryUrl() }}"/>
+                                        <div
+                                            class="opacity-0 group-hover:opacity-100 flex items-center justify-center absolute top-0 right-0 rounded-full bg-red-700 shadow-lg leading-none w-8 h-8 mr-2 mt-2 cursor-pointer transition-opacity duration-300"
+                                            wire:click.stop="clearPhoto()">
+                                            <span class="font-black text-white">X</span>
+                                        </div>
+                                    </div>
+                                @elseif ($generatedPhoto)
+                                    <div
+                                        class="absolute inset-0 bg-cover bg-no-repeat bg-center flex items-center justify-center rounded-md shadow-inner"
+                                        style="background-image: url('{{ $generatedPhoto }}');">
+                                        <div wire:loading wire:target="photo" wire:key="loading">
+                                            <div
+                                                class="flex items-center justify-center absolute inset-0 block bg-white bg-opacity-75 p-8">
+                                                <span class="text-center">Uploading photo ...</span>
+                                            </div>
+                                        </div>
+                                        <div wire:loading.remove wire:target="photo"
+                                             x-on:drop.prevent="adding = false; @this.upload('photo', event.dataTransfer.files[0])"
+                                             x-on:dragover.prevent="adding = true"
+                                             x-on:dragleave.prevent="adding = false"
+                                             x-bind:class="{ 'bg-opacity-100': adding }"
+                                             x-on:click.prevent="$refs.photo.click()"
+                                             class="text-center bg-white bg-opacity-75 rounded-md shadow p-10 cursor-pointer hover:bg-opacity-100 transition-colors duration-500">
+                                            <svg class=" mx-auto h-12 w-12 text-gray-400" stroke="currentColor"
+                                                 fill="none"
+                                                 viewBox="0 0 48 48">
+                                                <path
+                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <p class="mt-1 text-sm text-gray-600">
+                                                Click or Drag to upload another cover image
+                                            </p>
+                                            <p class="mt-1 text-xs text-gray-500">
+                                                PNG, JPG, GIF up to 10MB
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </x-form-field>
@@ -116,8 +124,8 @@
                                   class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">Cancel</button>
                         </span>
                         <span class="ml-3 inline-flex rounded-md shadow-sm">
-                            <button type="submit"
-                                    class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                            <button type="submit" disabled="disabled"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out disabled:bg-indigo-300 disabled:cursor-not-allowed">
                                 Save
                             </button>
                             <div wire:loading>

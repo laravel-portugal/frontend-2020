@@ -37,4 +37,15 @@ class SubmitLinkTest extends TestCase
             ])
             ->assertHasErrors(['website' => ['active_url', UniqueLink::class]]);
     }
+
+    /** @test */
+    public function it_generates_a_cover_image_from_the_website()
+    {
+        Livewire::test(SubmitLink::class)
+            ->set([
+                'website' => 'http://www.google.com'
+            ])
+            ->call('generateCoverImage')
+            ->assertNotSet('generatedPhoto', null);
+    }
 }
