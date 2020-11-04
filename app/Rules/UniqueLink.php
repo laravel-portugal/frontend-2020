@@ -6,14 +6,14 @@ use Illuminate\Contracts\Validation\Rule;
 
 class UniqueLink implements Rule
 {
-    protected static bool $fake = false;
+    protected static $fake = false;
 
-    public static function isFake(): bool
+    public static function isFake()
     {
         return self::$fake;
     }
 
-    public static function fake(bool $fake = true): void
+    public static function fake(bool $fake = true)
     {
         self::$fake = $fake;
     }

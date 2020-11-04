@@ -5,9 +5,9 @@ namespace App\Http\Livewire;
 use App\Http\Clients\ApiClient;
 use App\Http\Crawlers\OpenGraphMetaCrawler;
 use App\Rules\UniqueLink;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Spatie\Browsershot\Browsershot;
@@ -26,7 +26,7 @@ class SubmitLink extends Component
     public $website;
     public $description;
     public $tags;
-    public $avaliableTags;
+    public $availableTags;
     public $response;
     public $photo;
     public $generatedPhoto;
@@ -40,27 +40,27 @@ class SubmitLink extends Component
         $this->client = resolve(ApiClient::class);
     }
 
-    public function mount(): void
+    public function mount()
     {
-        $this->avaliableTags = $this->client->getTags();
+        $this->availableTags = $this->client->getTags();
     }
 
-    public function updatedWebsite(): void
+    public function updatedWebsite()
     {
         $this->validate(['website' => $this->getRules()['website']]);
     }
 
-    public function generateCoverImage(): void
+    public function generateCoverImage()
     {
         $this->generatedPhoto = $this->getOGImage() ?? $this->getBrowserShotImage();
     }
 
-    public function clearPhoto(): void
+    public function clearPhoto()
     {
         $this->photo = null;
     }
 
-    public function submit(): void
+    public function submit()
     {
         $this->validate($this->getRules());
 
@@ -93,14 +93,14 @@ class SubmitLink extends Component
         ];
     }
 
-    protected function getOGImage(): ?string
+    protected function getOGImage()
     {
         return $this->crawler
             ->crawl($this->website)
             ->getOGImage();
     }
 
-    protected function getBrowserShotImage(): ?string
+    protected function getBrowserShotImage()
     {
         $targetFile = $this->config['storage']['path'] . '/' . uniqid() . '.' . $this->config['cover_image']['format'];
         $targetPath = Storage::disk('public')
@@ -125,7 +125,7 @@ class SubmitLink extends Component
                 ->save($targetPath);
 
             return URL::to($targetFile);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return null;
         }
     }

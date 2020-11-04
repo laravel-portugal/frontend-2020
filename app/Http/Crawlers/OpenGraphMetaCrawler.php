@@ -2,29 +2,31 @@
 
 namespace App\Http\Crawlers;
 
+use DOMDocument;
+use DOMXPath;
 use Illuminate\Support\Str;
 
 class OpenGraphMetaCrawler
 {
-    protected ?string $content = null;
-    protected ?\DOMDocument $doc = null;
-    protected ?\DOMXPath $xPath = null;
+    protected $content = null;
+    protected $doc = null;
+    protected $xPath = null;
 
-    public function crawl(string $link): self
+    public function crawl($link)
     {
         $this->content = file_get_contents($link);
 
-        $this->doc = new \DOMDocument();
+        $this->doc = new DOMDocument();
         libxml_use_internal_errors(true);
         $this->doc->loadHTML($this->content);
         libxml_clear_errors();
 
-        $this->xPath = new \DOMXPath($this->doc);
+        $this->xPath = new DOMXPath($this->doc);
 
         return $this;
     }
 
-    public function getOGImage(): ?string
+    public function getOGImage()
     {
         $imgUrl = optional($this->xPath->query('//head/meta[@property="og:image"]/@content')[0])
             ->value;
