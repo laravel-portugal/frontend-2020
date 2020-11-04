@@ -15,6 +15,7 @@ class SubmitLinkTest extends TestCase
         parent::setUp();
 
         ApiClient::fake();
+        UniqueLink::fake();
     }
 
     /** @test */
@@ -35,5 +36,16 @@ class SubmitLinkTest extends TestCase
                 'website' => 'http://www.gugal.come'
             ])
             ->assertHasErrors(['website' => ['active_url', UniqueLink::class]]);
+    }
+
+    /** @test */
+    public function it_generates_a_cover_image_from_the_website()
+    {
+        Livewire::test(SubmitLink::class)
+            ->set([
+                'website' => 'http://www.google.com'
+            ])
+            ->call('generateCoverImage')
+            ->assertNotSet('generatedPhoto', null);
     }
 }
