@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Http;
+use App\Actions\ChecksEmailHasGravatar;
 use Livewire\Component;
 
 class Link extends Component
 {
-    public array $link;
-    public ?string $gravatar;
+    public $link;
+    public $gravatar;
 
     public function render()
     {
@@ -17,11 +17,6 @@ class Link extends Component
 
     public function mount(): void
     {
-        $hash           = md5(strtolower(trim($this->link['author_email'])));
-        $this->gravatar = "http://www.gravatar.com/avatar/{$hash}?d=404";
-        $response       = Http::get($this->gravatar);
-        if ( ! $response->ok()) {
-            $this->gravatar = null;
-        }
+        $this->gravatar = resolve(ChecksEmailHasGravatar::class)($this->link['author_email']);
     }
 }
