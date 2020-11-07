@@ -6,6 +6,18 @@ use Illuminate\Contracts\Validation\Rule;
 
 class UniqueLink implements Rule
 {
+    protected static $fake = false;
+
+    public static function isFake()
+    {
+        return self::$fake;
+    }
+
+    public static function fake(bool $fake = true)
+    {
+        self::$fake = $fake;
+    }
+
     /**
      * Determine if the validation rule passes.
      *
@@ -15,8 +27,12 @@ class UniqueLink implements Rule
      */
     public function passes($attribute, $value)
     {
+        if (self::$fake) {
+            return false;
+        }
+
         // TODO: call the api to find out if this link already exists or not.
-        return false;
+        return true;
     }
 
     /**
