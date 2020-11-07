@@ -101,7 +101,7 @@
                     <fieldset>
                         <legend class="text-base font-medium text-gray-900">Tags</legend>
                         <div class="mt-4">
-                            @foreach( $avaliableTags as $tag )
+                            @foreach( $availableTags as $tag )
                                 <div class="relative flex items-start">
                                     <div class="flex items-center h-5">
                                         <input id="tags[{{ $loop->index }}" type="checkbox"
