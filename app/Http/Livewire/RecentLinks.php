@@ -7,20 +7,28 @@ use Livewire\Component;
 
 class RecentLinks extends Component
 {
-    public string $title = 'Links recentes.';
-    public string $description = 'Todos juntos criamos diariamente um base de conhecimento.';
     public array $links;
-    private ApiClient $client;
+    // Protected
+    protected string $title = 'Links recentes.';
+    protected string $description = 'Todos juntos criamos diariamente um base de conhecimento.';
+    protected ApiClient $client;
 
     public function __construct()
     {
         parent::__construct();
         $this->client = resolve(ApiClient::class);
-        $this->links = $this->client->getRecentLinks()->all();
+    }
+
+    public function mount()
+    {
+        $this->links = $this->client->getRecentLinks()->json()['data'];
     }
 
     public function render()
     {
-        return view('livewire.recent-links');
+        return view('livewire.recent-links', [
+            'title' => $this->title,
+            'description' => $this->description,
+        ]);
     }
 }

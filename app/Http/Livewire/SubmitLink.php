@@ -16,9 +16,6 @@ class SubmitLink extends Component
 {
     use WithFileUploads;
 
-    protected ApiClient $client;
-    protected OpenGraphMetaCrawler $crawler;
-    protected array $config;
     public $title;
     public $name;
     public $email;
@@ -29,6 +26,10 @@ class SubmitLink extends Component
     public $response;
     public $photo;
     public $generatedPhoto;
+    // Protected
+    protected ApiClient $client;
+    protected OpenGraphMetaCrawler $crawler;
+    protected array $config;
 
     public function __construct($id = null)
     {

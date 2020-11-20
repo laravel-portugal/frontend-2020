@@ -2,14 +2,11 @@
 
 namespace App\Http\Clients\Domains;
 
-use App\Http\Clients\FakeClient;
-
 trait LinksClient
 {
     public function getRecentLinks()
     {
-        // TODO
-        return $this->response = (new FakeClient())->getRecentLinks();
+        return $this->response = $this->http()->get('links');
     }
 
     public function submitLink($data, $coverImage)

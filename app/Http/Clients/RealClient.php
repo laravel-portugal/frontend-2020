@@ -50,12 +50,12 @@ class RealClient extends ApiClient
             ->all();
     }
 
-    public function statusCode()
+    public function status()
     {
         return optional($this->response)->status();
     }
 
-    public function jsonContent()
+    public function json()
     {
         return optional($this->response)->json();
     }
