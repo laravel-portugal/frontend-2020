@@ -19,7 +19,6 @@ class SubmitLink extends Component
     protected ApiClient $client;
     protected OpenGraphMetaCrawler $crawler;
     protected array $config;
-
     public $title;
     public $name;
     public $email;
@@ -64,16 +63,26 @@ class SubmitLink extends Component
     {
         $this->validate($this->getRules());
 
-        $this->tags = collect($this->tags)->filter()->all();
+        $tags = collect($this->tags)
+            ->filter()
+            ->map(fn ($tag) => ['id' => $tag])
+            ->all();
 
-        $this->response = $this->client->submitLink([
-            'title' => $this->title,
-            'author_name' => $this->name,
-            'author_email' => $this->email,
-            'link' => $this->website,
-            'description' => $this->description,
-            'tags' => $this->tags,
-        ])->json();
+        if ($this->photo) {
+            $photo = Storage::path($this->photo->store('cover_images_photo'));
+        }
+
+        $this->response = $this->client->submitLink(
+            [
+                'title' => $this->title,
+                'author_name' => $this->name,
+                'author_email' => $this->email,
+                'link' => $this->website,
+                'description' => $this->description,
+                'tags' => $tags,
+            ],
+            $photo ?? $this->generatedPhoto
+        )->json();
     }
 
     public function render()
