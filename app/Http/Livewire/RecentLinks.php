@@ -21,7 +21,7 @@ class RecentLinks extends Component
 
     public function mount()
     {
-        $this->links = $this->client->getRecentLinks()->json()['data'];
+        $this->links = $this->client->getRecentLinks()['data'];
     }
 
     public function render()

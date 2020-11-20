@@ -6,15 +6,17 @@ trait LinksFakeClient
 {
     public function submitLink($data, $coverImage)
     {
-        return [
+        $this->response = [
             'status' => 1,
             'message' => 'Link submetido com sucesso.',
         ];
+
+        return $this;
     }
 
     public function getRecentLinks()
     {
-        return collect([
+        return $this->response = collect([
             'data' => [
                 [
                     'id' => 1,

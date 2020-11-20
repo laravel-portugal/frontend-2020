@@ -6,7 +6,9 @@ trait LinksClient
 {
     public function getRecentLinks()
     {
-        return $this->response = $this->http()->get('links');
+        $this->response = $this->http()->get('links');
+
+        return $this->response->json();
     }
 
     public function submitLink($data, $coverImage)
