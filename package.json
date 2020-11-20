@@ -22,5 +22,6 @@
     },
     "dependencies": {
         "puppeteer": "^5.4.1"
-    }
+    },
+    "name": "laravel"
 }
