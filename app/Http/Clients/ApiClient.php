@@ -17,13 +17,18 @@ abstract class ApiClient
         return self::$fake;
     }
 
+    public function getLastResponse()
+    {
+        return $this->response;
+    }
+
+    abstract public function json();
+
+    abstract public function status();
+
     abstract public function getRecentLinks();
 
     abstract public function getTags();
 
     abstract public function submitLink($data, $coverImage);
-
-    abstract public function statusCode();
-
-    abstract public function jsonContent();
 }

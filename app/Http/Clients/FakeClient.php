@@ -10,12 +10,12 @@ class FakeClient extends ApiClient
     use TagsFakeClient;
     use LinksFakeClient;
 
-    public function statusCode()
+    public function status()
     {
         return 200;
     }
 
-    public function jsonContent()
+    public function json()
     {
         return $this->response;
     }

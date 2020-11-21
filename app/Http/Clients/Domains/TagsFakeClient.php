@@ -8,7 +8,7 @@ trait TagsFakeClient
 {
     public function getTags()
     {
-        return collect([
+        return $this->response = collect([
             [
                 'id' => 1,
                 'name' => 'laravel',
