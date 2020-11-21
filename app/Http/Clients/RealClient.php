@@ -40,12 +40,23 @@ class RealClient extends ApiClient
     {
         return collect(explode('&', http_build_query($data)))
             ->map(function ($field) {
-                list($name, $value) = explode('=', $field);
+                [$name, $value] = explode('=', $field);
+
                 return [
                     'name' => urldecode($name),
                     'contents' => urldecode($value),
                 ];
             })
             ->all();
+    }
+
+    public function statusCode()
+    {
+        return optional($this->response)->status();
+    }
+
+    public function jsonContent()
+    {
+        return optional($this->response)->json();
     }
 }

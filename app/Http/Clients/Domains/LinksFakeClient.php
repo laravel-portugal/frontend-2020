@@ -2,10 +2,9 @@
 
 namespace App\Http\Clients\Domains;
 
-
 trait LinksFakeClient
 {
-    public function submitLink($data)
+    public function submitLink($data, $coverImage)
     {
         return [
             'status' => 1,
