@@ -26,7 +26,6 @@
                                 @if ($photo)
                                     <div wire:key="photo"
                                          class="absolute inset-0 block bg-cover bg-no-repeat bg-center group">
-                                        {{--                                         style="background-image: url('{{ $photo->temporaryUrl() }}')">--}}
                                         <img class="rounded-md h-full w-full object-cover"
                                              src="{{ $photo->temporaryUrl() }}"/>
                                         <div
@@ -103,11 +102,11 @@
                             @foreach($availableTags as $tag)
                                 <div class="relative flex items-start">
                                     <div class="flex items-center h-5">
-                                        <input
-                                            wire:model="tags.{{ $tag['id'] }}"
-                                            id="tags[{{ $loop->index }}]"
-                                            type="checkbox"
-                                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                                        <input wire:model="tags.id{{ $tag['id'] }}"
+                                               value="{{ $tag['id'] }}"
+                                               id="tags[{{ $loop->index }}]"
+                                               type="checkbox"
+                                               class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
                                         >
                                     </div>
                                     <div class="ml-3 text-sm leading-5">
