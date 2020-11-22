@@ -59,6 +59,7 @@ class FrontendHelperCommand extends Command
         $this->table(['method', 'description'],
             [
                 ['method' => 'mfs', 'description' => 'It will migrate:fresh, with seed option on.'],
+                ['method' => 'wt', 'description' => 'Seeds a set for E2E testing.'],
             ]
         );
     }
@@ -66,5 +67,10 @@ class FrontendHelperCommand extends Command
     private function mfs()
     {
         resolve(ApiCommands::class)->migrateFreshSeed();
+    }
+
+    private function wt()
+    {
+        resolve(ApiCommands::class)->websiteTesting();
     }
 }
