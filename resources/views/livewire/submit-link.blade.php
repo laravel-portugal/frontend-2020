@@ -113,7 +113,7 @@
                                                value="{{ $tag['id'] }}"
                                                id="tags[{{ $loop->index }}]"
                                                type="checkbox"
-                                               class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                                               class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out"
                                         >
                                     </div>
                                     <div class="ml-3 text-sm leading-5">
@@ -146,10 +146,10 @@
                             <button wire:loading.attr="disabled"
                                     type="submit"
                                     class="inline-flex justify-center py-2 px-4 border border-transparent
-                                        text-sm leading-5 font-medium rounded-md text-white bg-indigo-600
-                                        hover:bg-indigo-500 focus:outline-none focus:border-indigo-700
-                                        focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150
-                                         ease-in-out disabled:bg-indigo-300 disabled:cursor-not-allowed"
+                                        text-sm leading-5 font-medium rounded-md text-white bg-red-600
+                                        hover:bg-red-500 focus:outline-none focus:border-red-700
+                                        focus:shadow-outline-red active:bg-indigo-700 transition duration-150
+                                         ease-in-out disabled:bg-red-300 disabled:cursor-not-allowed"
                             >
                                 Save
                             </button>
