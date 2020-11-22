@@ -1,8 +1,8 @@
-<div class="mt-6">
-    <label @isset($id) for="{{ $id }}" @endisset class="block text-sm font-medium leading-5 text-gray-700">
+<div class="pb-6">
+    <label @isset($id) for="{{ $id }}" @endisset class="block text-gray-700 uppercase">
         {{ $label }}
     </label>
-    <div class="mt-1 rounded-md shadow-sm">
+    <div class="rounded-md shadow-sm">
         {{ $slot }}
     </div>
     @isset($id)

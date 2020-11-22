@@ -1,15 +1,15 @@
-<div class="bg-gray-50" xmlns:wire="http://www.w3.org/1999/xhtml">
+<div class="bg-gray-50 text-left" xmlns:wire="http://www.w3.org/1999/xhtml">
     <form
         x-data="{ adding: false, removing: false }"
-        class="w-11/12 md:w-2/3 mx-auto"
         wire:submit.prevent="submit"
     >
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-base">
+
                 <x-form-field id="website" label="Website">
                     <input
                         id="website"
-                        class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out text-xl"
                         placeholder="www.example.com"
                         wire:model.lazy="website"
                     >
@@ -80,26 +80,26 @@
 
                 <x-form-field label="Titulo" id="title">
                     <input id="title"
-                           class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                           class="form-input block w-full transition duration-150 ease-in-out text-xl"
                            wire:model.lazy="title"
                     >
                 </x-form-field>
 
                 <x-form-field label="Nome" id="name">
                     <input id="name"
-                           class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                           class="form-input block w-full transition duration-150 ease-in-out text-xl"
                            wire:model.lazy="name">
                 </x-form-field>
 
                 <x-form-field label="e-mail" id="email">
                     <input id="email"
-                           class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                           class="form-input block w-full transition duration-150 ease-in-out text-xl"
                            wire:model.lazy="email">
                 </x-form-field>
 
                 <x-form-field label="Descrição" id="description">
                     <textarea id="description" rows="3"
-                              class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                              class="form-textarea block w-full transition duration-150 ease-in-out text-xl"
                               wire:model.lazy="description"></textarea>
                 </x-form-field>
                 <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
