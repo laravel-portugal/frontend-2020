@@ -8,16 +8,22 @@ use Tests\DuskTestCase;
 
 class SubmitNewLinkTest extends DuskTestCase
 {
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    /** @test */
+    public function see_stuff()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/submit-link')
-                    ->assertSee('Laravel');
+                    ->assertSee('Laravel')
+            ;
+        });
+    }
+
+    /** @test */
+    public function dont_see_stuff()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/submit-link')
+                ->assertSee('Laravel');
         });
     }
 }
