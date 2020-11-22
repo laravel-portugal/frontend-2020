@@ -11,9 +11,9 @@ class RealClient extends ApiClient
     use LinksClient;
     use TagsClient;
 
-    protected $timeout = null;
-    protected $token = null;
-    protected $apiUrl = '';
+    protected $timeout;
+    protected $token;
+    protected $apiUrl;
 
     public function __construct()
     {

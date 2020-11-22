@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'api_url' => env('API_URL', 'http://api.lpt.test'),
+    'api_url' => env('API_URL', 'http://api.laravel.pt'),
     'http' => [
         'timeout' => env('HTTP_TIMEOUT', 10),
     ],
