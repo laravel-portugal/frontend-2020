@@ -5,6 +5,7 @@ namespace App\Http\Clients;
 abstract class ApiClient
 {
     protected static $fake = false;
+    protected $response = null;
 
     public static function fake()
     {
@@ -16,9 +17,18 @@ abstract class ApiClient
         return self::$fake;
     }
 
-    public abstract function getRecentLinks();
+    public function getLastResponse()
+    {
+        return $this->response;
+    }
 
-    public abstract function getTags();
+    abstract public function json();
 
-    public abstract function submitLink($data);
+    abstract public function status();
+
+    abstract public function getRecentLinks();
+
+    abstract public function getTags();
+
+    abstract public function submitLink($data, $coverImage);
 }
