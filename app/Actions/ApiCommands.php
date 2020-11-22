@@ -27,8 +27,8 @@ class ApiCommands
         $this->run(
             [
                 'php artisan migrate:fresh --force',
-                'php artisan db:seed --class=Domains\Tags\Database\Seeders\TagsTableSeeder --force',
-                'php artisan db:seed --class=Domains\Links\Database\Seeders\LinksTableSeeder --force',
+                'php artisan db:seed --class="Domains\Tags\Database\Seeders\TagsTableSeeder"',
+                'php artisan db:seed --class="Domains\Links\Database\Seeders\LinksTableSeeder"',
             ],
             $output
         );
