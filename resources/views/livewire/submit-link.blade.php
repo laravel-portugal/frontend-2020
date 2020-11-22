@@ -1,12 +1,18 @@
 <div class="bg-gray-50" xmlns:wire="http://www.w3.org/1999/xhtml">
-    <form class="w-11/12 md:w-2/3 mx-auto" wire:submit.prevent="submit"
-          x-data="{ adding: false, removing: false }">
+    <form
+        x-data="{ adding: false, removing: false }"
+        class="w-11/12 md:w-2/3 mx-auto"
+        wire:submit.prevent="submit"
+    >
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <x-form-field label="Website" id="website">
-                    <input id="website"
-                           class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                           placeholder="www.example.com" wire:model.lazy="website">
+                <x-form-field id="website" label="Website">
+                    <input
+                        id="website"
+                        class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        placeholder="www.example.com"
+                        wire:model.lazy="website"
+                    >
                 </x-form-field>
 
                 @if ($website && !$errors->get('website'))
