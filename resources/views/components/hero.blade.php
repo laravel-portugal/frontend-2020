@@ -72,8 +72,6 @@
                      aria-labelledby="main-menu">
                     <div class="px-5 pt-4 flex items-center justify-between">
                         <div>
-                            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
-                                 alt="">
                         </div>
                         <div class="-mr-2">
                             <button type="button"
