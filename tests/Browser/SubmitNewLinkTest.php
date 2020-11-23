@@ -18,6 +18,9 @@ class SubmitNewLinkTest extends DuskTestCase
             $email = 'artisan.one@laravel.pt';
             $description = 'O motor de busca, em português, para conveniência.';
 
+            // Nicety for manually open dev Tools (cmd+opt+I or F12)
+            //$browser->pause(60 * 1000);
+
             $browser
                 ->visit('/submit-link')
                 ->type('#website', 'https://sapo.pt')
@@ -35,7 +38,9 @@ class SubmitNewLinkTest extends DuskTestCase
                 ->check('tags[2]')
                 ->click('#submit')
                 // @TODO assert for the feedback (success and/or false)
-                ->pause(60 * 1000)
+
+                // Nicety for manually check the form submission
+                //->pause(60 * 1000)
             ;
         });
     }
