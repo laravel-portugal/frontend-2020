@@ -2,11 +2,12 @@
     <form
         x-data="{ adding: false, removing: false }"
         wire:submit.prevent="submit"
+        autocomplete="off"
     >
         <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-base">
 
-                <x-form-field id="website" label="Website">
+                <x-form-field id="website" label="Endereço URL">
                     <input
                         id="website"
                         class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out text-xl"
