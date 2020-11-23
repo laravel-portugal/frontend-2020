@@ -12,15 +12,30 @@ class SubmitNewLinkTest extends DuskTestCase
     public function submits_new_link_to_api()
     {
         $this->browse(function (Browser $browser) {
+            $browser->resize(1920, 1800);
+            $title = 'Serviço de Apontadores de Portugal';
+            $name = 'Artisan One';
+            $email = 'artisan.one@laravel.pt';
+            $description = 'O motor de busca, em português, para conveniência.';
+
             $browser
                 ->visit('/submit-link')
                 ->type('#website', 'https://sapo.pt')
-                ->type('#title', 'Serviço de Apontadores de Portugal')
-                ->pause(200)
-                ->type('#name', 'Artisan One')
-                ->type('#email', 'artisan.one@laravel.pt')
-                ->type('#description', 'O motor de busca, em português, para conveniência.')
-//                ->pause(60 * 1000)
+                ->keys('#website', '{tab}')
+                ->waitUntil('window.App.Events.photoGenerated')
+                ->type('#title', $title)
+                ->waitUntil("document.querySelector('#title').value == '{$title}'")
+                ->type('#name', $name)
+                ->waitUntil("document.querySelector('#name').value == '{$name}'")
+                ->type('#email', $email)
+                ->waitUntil("document.querySelector('#email').value == '{$email}'")
+                ->type('#description', $description)
+                ->waitUntil("document.querySelector('#description').value == '{$description}'")
+                ->check('tags[1]')
+                ->check('tags[2]')
+                ->click('#submit')
+                // @TODO assert for the feedback (success and/or false)
+                ->pause(60 * 1000)
             ;
         });
     }
