@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        if (app()->environment('production')) {
+            abort(1, 'I will not run in production, period!');
+        }
+        $this->call(LinksTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }

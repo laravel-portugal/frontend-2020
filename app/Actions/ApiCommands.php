@@ -17,9 +17,9 @@ class ApiCommands
         }
     }
 
-    public function migrateFreshSeed($output = true)
+    public function migrateFresh($output = true)
     {
-        $this->run('php artisan migrate:fresh --seed --force', $output);
+        $this->run('php artisan migrate:fresh --force', $output);
     }
 
     public function websiteTesting($output = true)

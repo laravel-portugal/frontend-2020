@@ -58,15 +58,15 @@ class FrontendHelperCommand extends Command
         $this->warn('Available:');
         $this->table(['method', 'description'],
             [
-                ['method' => 'mfs', 'description' => 'It will migrate:fresh, with seed option on.'],
+                ['method' => 'mf', 'description' => 'It will migrate:fresh.'],
                 ['method' => 'wt', 'description' => 'Seeds a set for E2E testing.'],
             ]
         );
     }
 
-    private function mfs()
+    private function mf()
     {
-        resolve(ApiCommands::class)->migrateFreshSeed();
+        resolve(ApiCommands::class)->migrateFresh();
     }
 
     private function wt()
