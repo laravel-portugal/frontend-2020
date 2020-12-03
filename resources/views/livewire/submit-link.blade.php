@@ -102,12 +102,13 @@
                               class="form-textarea block w-full transition duration-150 ease-in-out text-xl"
                               wire:model.defer="description"></textarea>
                 </x-form-field>
-                <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+
+                <div>
                     <fieldset>
-                        <legend class="text-base font-medium text-gray-900">Tags</legend>
-                        <div class="mt-4">
+                        <legend class="block m-0.5 text-gray-700 uppercase">Etiquetas / Tags</legend>
+                        <div class="mt-4 grid grid-cols-1 gap-2 md:grid-cols-2">
                             @foreach($availableTags as $tag)
-                                <div class="relative flex items-start">
+                                <div>
                                     <div class="flex items-center h-5">
                                         <input wire:model.defer="tags.id{{ $tag['id'] }}"
                                                value="{{ $tag['id'] }}"
@@ -116,21 +117,20 @@
                                                type="checkbox"
                                                class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out"
                                         >
-                                    </div>
-                                    <div class="ml-3 text-sm leading-5">
-                                        <label
-                                            for="tags[{{ $loop->index }}]"
-                                            class="font-medium text-gray-700"
-                                        >
-                                            {{ $tag['name'] }}
-                                        </label>
+                                        <div class="ml-3 text-sm leading-5">
+                                            <label for="tags[{{ $loop->index }}]" class="font-medium text-gray-700">
+                                                {{ $tag['name'] }}
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </fieldset>
                 </div>
-                <div class="border-t border-gray-200 mt-5 py-5 w-11/12 md:w-2/3 mx-auto">
+                @error('tags') <div class="mx-0.5 my-1 text-red-600"> {{ $message }} </div> @enderror
+
+                <div class="border-t border-gray-200 mt-10 py-5 mx-auto">
                     <div class="flex justify-start">
                         <span class="inline-flex rounded-md shadow-sm">
                             <button
@@ -162,7 +162,6 @@
                     Em submissão
                 </div>
                 <pre>
-                    {{ json_encode($response) }}
                     @isset($response['status']) {{ $response['status'] }} @endisset
                     @isset($response['message']) {{ $response['message'] }} @endisset
                 </pre>

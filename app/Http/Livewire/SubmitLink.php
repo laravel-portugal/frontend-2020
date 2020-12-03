@@ -35,6 +35,12 @@ class SubmitLink extends Component
         'website.required' => 'É necessário indicar um endereço URL.',
         'website.url' => 'O endereço URL tem de ter a forma <protocolo>://<host><uri>, por exemplo https://www.google.com',
         'website.active_url' => 'O servidor/hostname indicado no endereço URL não existe.',
+        'title.required' => 'É necessário indicar um título para o registo.',
+        'name.required' => 'É necessário indicar um nome para associar ao registo.',
+        'email.required' => 'É necessário indicar um e-mail para associar ao registo.',
+        'email.email' => 'O e-mail tem de ser válido.',
+        'description.required' => 'Coloque uma descrição no registo.',
+        'tags.required' => 'Classifique o registo com uma etiqueta.',
     ];
 
     public function __construct($id = null)
@@ -80,6 +86,8 @@ class SubmitLink extends Component
 
         if ($this->photo) {
             $photo = Storage::path($this->photo->store('cover_images_photo'));
+        } else if ($this->generatedPhoto) {
+            $photo = Storage::path($this->generatedPhoto->store('cover_images_photo'));
         }
 
         $this->response = $this->client->submitLink(
@@ -105,7 +113,7 @@ class SubmitLink extends Component
         return [
             'title' => 'required',
             'name' => 'required',
-            'email' => 'email|required',
+            'email' => 'required|email',
             'website' => ['required', 'url', 'active_url', new UniqueLink()],
             'description' => 'required',
             'tags' => 'required',
