@@ -31,6 +31,12 @@ class SubmitLink extends Component
     protected OpenGraphMetaCrawler $crawler;
     protected array $config;
 
+    protected array $messages = [
+        'website.required' => 'É necessário indicar um endereço URL.',
+        'website.url' => 'O endereço URL tem de ter a forma <protocolo>://<host><uri>, por exemplo https://www.google.com',
+        'website.active_url' => 'O servidor/hostname indicado no endereço URL não existe.',
+    ];
+
     public function __construct($id = null)
     {
         parent::__construct($id);
@@ -45,22 +51,24 @@ class SubmitLink extends Component
         $this->availableTags = $this->client->getTags();
     }
 
-    public function updatedWebsite()
+    public function updatedWebsite(): void
     {
-        $this->validate(['website' => $this->getRules()['website']]);
+        $this->validate([
+            'website' => $this->getRules()['website'],
+        ]);
     }
 
-    public function generateCoverImage()
+    public function generateCoverImage(): void
     {
         $this->generatedPhoto = $this->getOGImage() ?? $this->getBrowserShotImage();
     }
 
-    public function clearPhoto()
+    public function clearPhoto(): void
     {
         $this->photo = null;
     }
 
-    public function submit()
+    public function submit(): void
     {
         $this->validate($this->getRules());
 
@@ -97,7 +105,7 @@ class SubmitLink extends Component
             'title' => 'required',
             'name' => 'required',
             'email' => 'email|required',
-            'website' => ['required', 'active_url', new UniqueLink()],
+            'website' => ['required', 'url', 'active_url', new UniqueLink()],
             'description' => 'required',
             'tags' => 'required',
         ];
@@ -112,9 +120,8 @@ class SubmitLink extends Component
 
     protected function getBrowserShotImage()
     {
-        $targetFile = $this->config['storage']['path'] . '/' . uniqid() . '.' . $this->config['cover_image']['format'];
-        $targetPath = Storage::disk('public')
-            ->path($targetFile);
+        $targetFile = $this->config['storage']['path'] . '/' . uniqid('', true) . '.' . $this->config['cover_image']['format'];
+        $targetPath = Storage::disk('public')->path($targetFile);
 
         $img = null;
         try {

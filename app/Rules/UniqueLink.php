@@ -42,6 +42,6 @@ class UniqueLink implements Rule
      */
     public function message()
     {
-        return 'The link already exists in our database.';
+        return 'Já existe um registo na base de dados com este endereço URL.';
     }
 }

@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "ext-libxml": "*",
+        "ext-dom": "*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -22,6 +24,7 @@
         "spatie/browsershot": "^3.40"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "barryvdh/laravel-ide-helper": "^2.8",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",

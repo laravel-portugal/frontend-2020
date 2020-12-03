@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/submit-link', function () {
-    return view('submit-link');
-});
+Route::get('/submit-link', [LinkController::class, 'create']);
 
 Route::get('/user/{username}/links', function () {
     return "<h1> trabalha malandro </h1>";

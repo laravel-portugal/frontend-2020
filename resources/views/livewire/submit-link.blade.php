@@ -6,16 +6,14 @@
     >
         <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-base">
-
                 <x-form-field id="website" label="Endereço URL">
                     <input
                         id="website"
                         class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out text-xl"
-                        placeholder="www.example.com"
+                        placeholder="http://www.host.tld"
                         wire:model.lazy="website"
                     >
                 </x-form-field>
-
                 @if ($website && !$errors->get('website'))
                     <x-form-field label="Image Preview">
                         <div class="mt-1 flex-col rounded-md">
