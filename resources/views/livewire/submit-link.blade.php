@@ -1,6 +1,7 @@
 <div class="bg-gray-50 text-left" xmlns:wire="http://www.w3.org/1999/xhtml">
     <form
         x-data="{ adding: false, removing: false }"
+        x-init="Livewire.on('photo:update', () => window.App.Events.photoGenerated = true)"
         wire:submit.prevent="submit"
         autocomplete="off"
     >
@@ -80,26 +81,26 @@
                 <x-form-field label="Titulo" id="title">
                     <input id="title"
                            class="form-input block w-full transition duration-150 ease-in-out text-xl"
-                           wire:model.lazy="title"
+                           wire:model.defer="title"
                     >
                 </x-form-field>
 
                 <x-form-field label="Nome" id="name">
                     <input id="name"
                            class="form-input block w-full transition duration-150 ease-in-out text-xl"
-                           wire:model.lazy="name">
+                           wire:model.defer="name">
                 </x-form-field>
 
                 <x-form-field label="e-mail" id="email">
                     <input id="email"
                            class="form-input block w-full transition duration-150 ease-in-out text-xl"
-                           wire:model.lazy="email">
+                           wire:model.defer="email">
                 </x-form-field>
 
                 <x-form-field label="Descrição" id="description">
                     <textarea id="description" rows="3"
                               class="form-textarea block w-full transition duration-150 ease-in-out text-xl"
-                              wire:model.lazy="description"></textarea>
+                              wire:model.defer="description"></textarea>
                 </x-form-field>
                 <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <fieldset>
@@ -108,9 +109,10 @@
                             @foreach($availableTags as $tag)
                                 <div class="relative flex items-start">
                                     <div class="flex items-center h-5">
-                                        <input wire:model="tags.id{{ $tag['id'] }}"
+                                        <input wire:model.defer="tags.id{{ $tag['id'] }}"
                                                value="{{ $tag['id'] }}"
                                                id="tags[{{ $loop->index }}]"
+                                               name="tags[{{ $loop->index }}]"
                                                type="checkbox"
                                                class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out"
                                         >
@@ -144,6 +146,7 @@
                         <span class="ml-3 inline-flex rounded-md shadow-sm">
                             <button wire:loading.attr="disabled"
                                     type="submit"
+                                    id="submit"
                                     class="inline-flex justify-center py-2 px-4 border border-transparent
                                         text-sm leading-5 font-medium rounded-md text-white bg-red-600
                                         hover:bg-red-500 focus:outline-none focus:border-red-700

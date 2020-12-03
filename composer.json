@@ -16,8 +16,6 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/dusk": "^6.8",
         "laravel/framework": "^8.0",
-        "laravel/jetstream": "^1.2",
-        "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "laravolt/avatar": "^4.0",
         "livewire/livewire": "^2.0",
@@ -46,7 +44,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Domains\\":"domains/"
         }
     },
     "autoload-dev": {

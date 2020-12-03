@@ -26,7 +26,7 @@ class SubmitLink extends Component
     public $response;
     public $photo;
     public $generatedPhoto;
-    // Protected
+
     protected ApiClient $client;
     protected OpenGraphMetaCrawler $crawler;
     protected array $config;
@@ -61,6 +61,7 @@ class SubmitLink extends Component
     public function generateCoverImage(): void
     {
         $this->generatedPhoto = $this->getOGImage() ?? $this->getBrowserShotImage();
+        $this->emit('photo:update');
     }
 
     public function clearPhoto(): void
