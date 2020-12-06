@@ -9,7 +9,7 @@ pipeline {
       steps {
         script {
           def composer = docker.image('composer:2')
-          def php = docker.image('hub.sidecar.laravel.pt/frontbase:1')
+          def php = docker.image('php:7.4-fpm')
           php.pull()
           composer.pull()
           composer.inside {
