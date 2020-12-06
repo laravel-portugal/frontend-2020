@@ -9,7 +9,9 @@ pipeline {
       steps {
         script {
           def composer = docker.image('composer:2')
-          def php = docker.image('hub.sidecar.laravel.pt/frontbase:1')
+          docker.withRegistry("https://$registry") {
+            def php = docker.image('hub.sidecar.laravel.pt/frontbase:1')
+          }
           php.pull()
           composer.pull()
           composer.inside {
