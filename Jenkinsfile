@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy in production') {
       steps {
         sshagent ( credentials: ['artisanpt-ssh']) {
-          sh '''ssh -o StrictHostKeyChecking=no root@$productionServerIp << EOL
+          sh '''ssh -o StrictHostKeyChecking=no root@www.sidecar.laravel.pt << EOL
             cd laravel.pt
             TAG=$BUILD_NUMBER docker-compose up -d
           '''
