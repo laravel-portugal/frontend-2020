@@ -1,0 +1,18 @@
+version: "3.7"
+
+networks:
+  web:
+    external: true
+
+services:
+  myapp:
+    image: hub.sidecar.laravel.pt/frontend:${TAG}
+    networks: 
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.myapp.rule=Host(`frontend.sidecar.laravel.pt`)"
+      - "traefik.http.routers.myapp.entrypoints=websecure"
+      - "traefik.http.services.myapp.loadbalancer.server.port=80"
+      - "traefik.http.routers.myapp.service=myapp"
+      - "traefik.http.routers.myapp.tls.certresolver=leresolver"
