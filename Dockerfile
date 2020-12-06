@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM hub.sidecar.laravel.pt/frontbase:1
 ADD . /var/www/html
 RUN composer install
 EXPOSE 80
