@@ -9,10 +9,8 @@ pipeline {
       steps {
         script {
           def composer = docker.image('composer:2')
-          docker.withRegistry("https://$registry") {
-            def php = docker.image('hub.sidecar.laravel.pt/frontbase:1')
-            php.pull()
-          }
+          def php = docker.image('hub.sidecar.laravel.pt/frontbase:1')
+          php.pull()
           composer.pull()
           composer.inside {
               // to remove the need for the ignore, lets make our base image.
