@@ -13,7 +13,8 @@ pipeline {
           php.pull()
           composer.pull()
           composer.inside {
-              sh "composer install"
+              // to remove the need for the ignore, lets make our base image.
+              sh "composer install --ignore-platform-reqs"
           }
           php.inside {
             sh "cp .env.example .env"
