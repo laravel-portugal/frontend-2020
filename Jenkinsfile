@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = 'hub.sidecar.laravel.pt'
+    registry = 'reg.laravel.pt'
     imageName = 'frontend'
   }
   agent any
