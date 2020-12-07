@@ -5,8 +5,8 @@ networks:
     external: true
 
 services:
-  myapp:
-    image: hub.sidecar.laravel.pt/frontend:${TAG}
+  frontend:
+    image: reg.laravel.pt/frontend:${TAG}
     networks: 
       - web
     labels:
