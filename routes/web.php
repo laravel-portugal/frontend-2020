@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('test-deploy');
-    // return view('welcome');
+     return view('welcome');
 });
 
 Route::get('/submit-link', [LinkController::class, 'create']);
