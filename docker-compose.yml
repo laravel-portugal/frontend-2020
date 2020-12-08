@@ -11,6 +11,8 @@ services:
     restart: always
     networks:
       - web
+    volumes:
+      - ./.env:/var/www/html/.env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`frontend.sidecar.laravel.pt`)"
