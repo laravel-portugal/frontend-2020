@@ -8,7 +8,8 @@ services:
   frontend:
     image: reg.laravel.pt/frontend:${TAG}
     container_name: frontend
-    networks: 
+    restart: always
+    networks:
       - web
     labels:
       - "traefik.enable=true"
