@@ -9,18 +9,14 @@ services:
     restart: always
     networks:
       - web
-    expose:
-      - 80
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ./:/var/www/html
-    ports:
-      - 81:80
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`frontend.sidecar.laravel.pt.test`)"
       - "traefik.http.routers.frontend.entrypoints=web"
-      - "traefik.http.services.frontend.loadbalancer.server.port=80"
       - "traefik.http.routers.frontend.service=frontend"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
