@@ -6,17 +6,21 @@ networks:
 
 services:
   frontend:
-    image: reg.laravel.pt/frontend:${TAG}
-    container_name: frontend
     restart: always
     networks:
       - web
+    expose:
+      - 80
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ./.env:/var/www/html/.env
+      - ./:/var/www/html
+    ports:
+      - 81:80
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`frontend.sidecar.laravel.pt`)"
-      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.rule=Host(`frontend.sidecar.laravel.pt.test`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
       - "traefik.http.routers.frontend.service=frontend"
-      - "traefik.http.routers.frontend.tls.certresolver=leresolver"
