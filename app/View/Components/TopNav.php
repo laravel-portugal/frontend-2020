@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class top-nav extends Component
+class TopNav extends Component
 {
     /**
      * Create a new component instance.
