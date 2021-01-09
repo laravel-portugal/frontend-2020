@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+     return view('pre-2021');
+});
+
+Route::get('/welcome', function () {
      return view('welcome');
 });
 
