@@ -1,0 +1,19 @@
+version: "3.7"
+
+networks:
+  web:
+    external: true
+
+services:
+  frontend:
+    restart: always
+    networks:
+      - web
+    image: "hub.laravel.pt/frontend:${TAG}"
+    volumes:
+      - .env/:/var/www/html/.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`www.laravel.pt`)"
+      - "traefik.http.routers.frontend.entrypoints=https"
+      - "traefik.http.routers.frontend.tls.certresolver=leresolver"
